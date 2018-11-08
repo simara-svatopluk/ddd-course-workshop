@@ -1,0 +1,16 @@
+<?php
+
+declare(strict_types=1);
+
+namespace DDDWorkshop\Domain;
+
+use PHPUnit\Framework\TestCase;
+
+class TotalAmountTest extends TestCase
+{
+    public function testEmptyIsEqualToZero()
+    {
+        $totalAmount = new TotalAmount();
+        $this->assertSame(0.0, $totalAmount->toFloat());
+    }
+}
