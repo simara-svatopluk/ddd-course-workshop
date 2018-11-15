@@ -35,6 +35,6 @@
     ],
     "phpunit": "vendor/bin/phpunit tests",
     "phpcs": "vendor/bin/phpcs --standard=PSR2 src tests",
-    "phpstan": "vendor/bin/phpstan analyse --level 7 src tests"
+    "phpstan": "vendor/bin/phpstan analyse --level=max src tests"
   }
 }
