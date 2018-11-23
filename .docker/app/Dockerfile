@@ -6,7 +6,7 @@ MAINTAINER Lukas Benke
 WORKDIR /var/www
 
 ###########################################################################
-# Laradock non-root user:
+# Non-root user:
 ###########################################################################
 
 # Add a non-root user to prevent files being created with root permissions on host machine.
@@ -20,7 +20,8 @@ RUN apt-get update -yqq && \
     pecl channel-update pecl.php.net && \
     groupadd -g ${PGID} appuser && \
     useradd -u ${PUID} -g appuser -m appuser -G appuser && \
-    usermod -p "*" appuser
+    usermod -p "*" appuser && \
+    usermod --shell /bin/bash appuser
 
 #
 #--------------------------------------------------------------------------
@@ -46,7 +47,7 @@ RUN apt-get update \
     unzip
 
   # Install the PHP pdo_mysql extention
-  RUN docker-php-ext-install pdo_mysql \
+RUN docker-php-ext-install pdo_mysql \
   # Install the PHP pdo_pgsql extention
   && docker-php-ext-install pdo_pgsql \
   # Install the PHP gd library
@@ -56,6 +57,35 @@ RUN apt-get update \
     docker-php-ext-install gd
 
 RUN docker-php-ext-install zip
+
+###########################################################################
+# ssh:
+###########################################################################
+
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends \
+  openssh-server \
+  openssh-client
+
+RUN service ssh start
+
+COPY insecure_id_rsa /tmp/id_rsa
+COPY insecure_id_rsa.pub /tmp/id_rsa.pub
+
+RUN mkdir /home/root
+RUN mkdir /home/root/.ssh
+RUN mkdir /home/appuser/.ssh
+
+RUN cat /tmp/id_rsa.pub >> /home/root/.ssh/authorized_keys \
+    && cat /tmp/id_rsa.pub >> /home/root/.ssh/id_rsa.pub \
+    && cat /tmp/id_rsa >> /home/root/.ssh/id_rsa \
+    && rm -f /tmp/id_rsa* \
+    && chmod 644 /home/root/.ssh/authorized_keys /home/root/.ssh/id_rsa.pub \
+&& chmod 400 /home/root/.ssh/id_rsa \
+&& cp -rf /home/root/.ssh /home/appuser \
+&& chown -R appuser:appuser /home/appuser/.ssh
+
+COPY app/ssh/sshd_config /etc/ssh/sshd_config
 
 #####################################
 # Composer:
@@ -73,3 +103,5 @@ COPY app/vhost.conf /etc/apache2/sites-available/000-default.conf
 
 RUN chown -R www-data:www-data /var/www \
     && a2enmod rewrite
+
+ENTRYPOINT service ssh start && apache2-foreground
