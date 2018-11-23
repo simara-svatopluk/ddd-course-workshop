@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DDDWorkshop\Domain;
 
+use DDDWorkshop\Domain\ValueObjects\TotalAmount;
 use PHPUnit\Framework\TestCase;
 
 class TotalAmountTest extends TestCase
