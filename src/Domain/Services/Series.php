@@ -9,9 +9,6 @@ use DDDWorkshop\Domain\ValueObjects\Number;
 
 class Series implements SeriesInterface
 {
-    /**
-     * @return Number
-     */
     public function getNextNumber(): Number
     {
         return new Number("VF/0001");
