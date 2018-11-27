@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace DDDWorkshop\Domain\Entities;
 
+use DDDWorkshop\Domain\Exceptions\DateOfPaymentIsBeforeDateOfIssue;
+use DDDWorkshop\Domain\Exceptions\SellerIsOnRegistrNespolehlivychPlatcu;
 use DDDWorkshop\Domain\Interfaces\RegistrNespolehlivychPlatcuInterface;
 use DDDWorkshop\Domain\Interfaces\SeriesInterface;
 use DDDWorkshop\Domain\ValueObjects\Buyer;
 use DDDWorkshop\Domain\ValueObjects\DateOfIssue;
 use DDDWorkshop\Domain\ValueObjects\DateOfPayment;
 use DDDWorkshop\Domain\ValueObjects\InvoiceItems;
-use DDDWorkshop\Domain\ValueObjects\Number;
+use DDDWorkshop\Domain\ValueObjects\OrderNumber;
 use DDDWorkshop\Domain\ValueObjects\Paid;
 use DDDWorkshop\Domain\ValueObjects\PaymentInformation;
 use DDDWorkshop\Domain\ValueObjects\Seller;
@@ -47,17 +49,9 @@ class IssuedInvoice
      */
     private $paid;
     /**
-     * @var Number
+     * @var OrderNumber
      */
     private $number;
-    /**
-     * @var RegistrNespolehlivychPlatcuInterface
-     */
-    private $registrNespolehlivychPlatcu;
-    /**
-     * @var SeriesInterface
-     */
-    private $series;
 
     /**
      * IssuedInvoice constructor.
@@ -70,6 +64,7 @@ class IssuedInvoice
      * @param Paid $paid
      * @param RegistrNespolehlivychPlatcuInterface $registrNespolehlivychPlatcu
      * @param SeriesInterface $series
+     * @throws SellerIsOnRegistrNespolehlivychPlatcu
      */
     public function __construct(
         Seller $seller,
@@ -83,14 +78,14 @@ class IssuedInvoice
         SeriesInterface $series
     ) {
         //check Registr Nespolehlivych Platcu
-        if ($registrNespolehlivychPlatcu->checkByIco($seller->getIco())) {
-            // TODO: throw exception
+        if ($registrNespolehlivychPlatcu->isPresentByIco($seller->getIco())) {
+            throw new SellerIsOnRegistrNespolehlivychPlatcu($seller);
         }
         //get next number in series
         $number = $series->getNextNumber();
         //check that date of issue is before date of payment
         if (!$dateOfIssue->getDate()->earlierThan($dateOfPayment->getDate())) {
-            //todo: throw exception
+            throw new DateOfPaymentIsBeforeDateOfIssue($dateOfIssue, $dateOfPayment);
         }
 
         $this->seller = $seller;
@@ -152,9 +147,9 @@ class IssuedInvoice
     }
 
     /**
-     * @return Number
+     * @return OrderNumber
      */
-    public function getNumber(): Number
+    public function getNumber(): OrderNumber
     {
         return $this->number;
     }

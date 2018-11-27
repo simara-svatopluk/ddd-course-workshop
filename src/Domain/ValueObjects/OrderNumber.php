@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DDDWorkshop\Domain\ValueObjects;
 
-class Number
+class OrderNumber
 {
     /**
      * @var string

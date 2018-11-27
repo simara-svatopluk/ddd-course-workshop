@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace DDDWorkshop\Domain\Interfaces;
 
-use DDDWorkshop\Domain\ValueObjects\Number;
+use DDDWorkshop\Domain\ValueObjects\OrderNumber;
 
 interface SeriesInterface
 {
     /**
-     * @return Number
+     * @return OrderNumber
      */
-    public function getNextNumber(): Number;
+    public function getNextNumber(): OrderNumber;
 }

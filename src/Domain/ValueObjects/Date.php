@@ -6,6 +6,7 @@ namespace DDDWorkshop\Domain\ValueObjects;
 
 use DateTimeImmutable;
 use InvalidArgumentException;
+use function preg_match;
 
 class Date
 {
@@ -44,9 +45,14 @@ class Date
      *
      * @param string $dateInCzechFormat
      * @return Date
+     * @throws InvalidArgumentException
      */
     public static function createFromCzechString(string $dateInCzechFormat): Date
     {
+        // check format
+        if (!preg_match("/^([1-9][1-9]*)\.([1-9][1-9]*)\.([0-9]{4})$/", $dateInCzechFormat)) {
+            throw new InvalidArgumentException('Invalid date given');
+        }
         $dt = DateTimeImmutable::createFromFormat('j.n.Y', $dateInCzechFormat);
 
         if (!$dt) {
@@ -58,6 +64,29 @@ class Date
             (int)$dt->format('m'),
             (int)$dt->format('d')
         );
+    }
+
+    /**
+     * @param Date $object
+     *
+     * @return bool
+     */
+    public function laterThan(Date $object): bool
+    {
+        return (
+                $this->getYear() > $object->getYear()
+            )
+            ||
+            (
+                $this->getYear() >= $object->getYear() &&
+                $this->getMonth() > $object->getMonth()
+            )
+            ||
+            (
+                $this->getYear() >= $object->getYear() &&
+                $this->getMonth() >= $object->getMonth() &&
+                $this->getDay() > $object->getDay()
+            );
     }
 
     /**
@@ -105,28 +134,5 @@ class Date
     public function getDay(): int
     {
         return $this->day;
-    }
-
-    /**
-     * @param Date $object
-     *
-     * @return bool
-     */
-    public function laterThan(Date $object): bool
-    {
-        return (
-                $this->getYear() > $object->getYear()
-            )
-            ||
-            (
-                $this->getYear() >= $object->getYear() &&
-                $this->getMonth() > $object->getMonth()
-            )
-            ||
-            (
-                $this->getYear() >= $object->getYear() &&
-                $this->getMonth() >= $object->getMonth() &&
-                $this->getDay() > $object->getDay()
-            );
     }
 }

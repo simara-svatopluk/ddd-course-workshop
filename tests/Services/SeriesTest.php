@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace DDDWorkshop\Services;
 
 use DDDWorkshop\Domain\Services\Series;
-use DDDWorkshop\Domain\ValueObjects\Number;
+use DDDWorkshop\Domain\ValueObjects\OrderNumber;
 use PHPUnit\Framework\TestCase;
 
 class SeriesTest extends TestCase
@@ -17,6 +17,6 @@ class SeriesTest extends TestCase
     {
         $series = new Series();
 
-        $this->assertInstanceOf(Number::class, $series->getNextNumber());
+        $this->assertInstanceOf(OrderNumber::class, $series->getNextNumber());
     }
 }

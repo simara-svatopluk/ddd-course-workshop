@@ -23,9 +23,9 @@ class Buyer
      * Buyer constructor.
      * @param string $name
      * @param string $address
-     * @param ICO $ico
+     * @param ICO|null $ico
      */
-    public function __construct(string $name, string $address, ICO $ico)
+    public function __construct(string $name, string $address, ?ICO $ico)
     {
         $this->name = $name;
         $this->address = $address;
@@ -53,6 +53,6 @@ class Buyer
      */
     public function getIco(): ICO
     {
-        return $this->ico;
+        return $this->ico ?? new NullICO('');
     }
 }

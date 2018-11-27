@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DDDWorkshop\Domain;
 
-use DDDWorkshop\Domain\ValueObjects\Number;
+use DDDWorkshop\Domain\ValueObjects\OrderNumber;
 use PHPUnit\Framework\TestCase;
 
 class NumberTest extends TestCase
@@ -14,9 +14,9 @@ class NumberTest extends TestCase
      */
     public function itCanCreateItself()
     {
-        $number = new Number("V/2018001");
+        $number = new OrderNumber("V/2018001");
 
-        $this->assertInstanceOf(Number::class, $number);
+        $this->assertInstanceOf(OrderNumber::class, $number);
         $this->assertEquals("V/2018001", $number->getNumber());
     }
 }
