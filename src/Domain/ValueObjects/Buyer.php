@@ -15,7 +15,7 @@ class Buyer
      */
     private $address;
     /**
-     * @var ICO
+     * @var ICO|null
      */
     private $ico;
 
