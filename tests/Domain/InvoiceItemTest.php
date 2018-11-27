@@ -12,7 +12,7 @@ class InvoiceItemTest extends TestCase
     /**
      * @test
      */
-    public function itCanCreateItselfGivenValidData()
+    public function itCanCreateItselfGivenValidData():void
     {
         $invoiceItem = new InvoiceItem("Polozka faktury", 1, 100);
 
@@ -22,7 +22,7 @@ class InvoiceItemTest extends TestCase
     /**
      * @test
      */
-    public function itCanGetTotalAmount()
+    public function itCanGetTotalAmount():void
     {
         $invoiceItem = new InvoiceItem("Polozka faktury", 1, 100);
         $this->assertEquals(100, $invoiceItem->getTotalAmount());

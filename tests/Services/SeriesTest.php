@@ -13,7 +13,7 @@ class SeriesTest extends TestCase
     /**
      * @test
      */
-    public function itCanGetNextNumber()
+    public function itCanGetNextNumber():void
     {
         $series = new Series();
 

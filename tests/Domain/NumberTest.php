@@ -12,7 +12,7 @@ class NumberTest extends TestCase
     /**
      * @test
      */
-    public function itCanCreateItself()
+    public function itCanCreateItself():void
     {
         $number = new OrderNumber("V/2018001");
 

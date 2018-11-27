@@ -13,7 +13,7 @@ class ICOTest extends TestCase
     /**
      * @test
      */
-    public function itCanCreateItselfWhenGivenValidIco()
+    public function itCanCreateItselfWhenGivenValidIco():void
     {
         $ico = new ICO("25596641");
         $this->assertInstanceOf(ICO::class, $ico);
@@ -22,7 +22,7 @@ class ICOTest extends TestCase
     /**
      * @test
      */
-    public function itThrowsExceptionWhenGivenInvalidIco()
+    public function itThrowsExceptionWhenGivenInvalidIco():void
     {
         $this->expectException(InvalidArgumentException::class);
 

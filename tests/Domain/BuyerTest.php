@@ -14,7 +14,7 @@ class BuyerTest extends TestCase
     /**
      * @test
      */
-    public function itCanCreateItselfWhenGivenValidData()
+    public function itCanCreateItselfWhenGivenValidData():void
     {
         $buyer = new Buyer(
             "Pepa Voprsalek",
@@ -28,7 +28,7 @@ class BuyerTest extends TestCase
     /**
      * @test
      */
-    public function itCanCreateItselfWithNullIco()
+    public function itCanCreateItselfWithNullIco():void
     {
         $buyer = new Buyer(
             "Pepa Koncak",

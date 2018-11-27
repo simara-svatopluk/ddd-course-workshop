@@ -12,7 +12,7 @@ class PaymentInformationTest extends TestCase
     /**
      * @test
      */
-    public function itCanCreateItselfGivenValidData()
+    public function itCanCreateItselfGivenValidData():void
     {
         $paymentInformation = new PaymentInformation("Bankovní převod");
 

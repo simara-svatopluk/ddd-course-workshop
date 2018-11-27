@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class TotalAmountTest extends TestCase
 {
-    public function testEmptyIsEqualToZero(): void
+    public function testEmptyIsEqualToZero():void
     {
         $totalAmount = new TotalAmount();
         $this->assertSame(0.0, $totalAmount->toFloat());

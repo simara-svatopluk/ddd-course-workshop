@@ -13,7 +13,7 @@ class InvoiceItemsTest extends TestCase
     /**
      * @test
      */
-    public function itCanCreateItselfGivenArrayOfInvoiceItem()
+    public function itCanCreateItselfGivenArrayOfInvoiceItem():void
     {
         $items = [
             new InvoiceItem("Polozka faktury", 2, 100),
@@ -27,7 +27,7 @@ class InvoiceItemsTest extends TestCase
     /**
      * @test
      */
-    public function itCanGetCountOfItems()
+    public function itCanGetCountOfItems():void
     {
         $items = [
             new InvoiceItem("Polozka faktury", 2, 100),
@@ -41,7 +41,7 @@ class InvoiceItemsTest extends TestCase
     /**
      * @test
      */
-    public function itCanAddItem()
+    public function itCanAddItem():void
     {
         $invoiceItems = new InvoiceItems();
 
@@ -57,7 +57,7 @@ class InvoiceItemsTest extends TestCase
     /**
      * @test
      */
-    public function itCanGetTotalAmount()
+    public function itCanGetTotalAmount():void
     {
         $invoiceItems = new InvoiceItems();
 

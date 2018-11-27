@@ -13,7 +13,7 @@ class SellerTest extends TestCase
     /**
      * @test
      */
-    public function itCanCreateItselfWhenGivenValidData()
+    public function itCanCreateItselfWhenGivenValidData():void
     {
         $seller = new Seller("Kupujici Honza", "Ztracena 12, Viden-Sever, 60200", new ICO("25596641"));
 

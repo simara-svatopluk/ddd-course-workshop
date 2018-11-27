@@ -12,7 +12,7 @@ class DateTest extends TestCase
     /**
      * @test
      */
-    public function itCreateItselfGivenValidDateUsingConstructor()
+    public function itCreateItselfGivenValidDateUsingConstructor():void
     {
         $date = new Date(2018, 11, 23);
 
@@ -26,7 +26,7 @@ class DateTest extends TestCase
     /**
      * @test
      */
-    public function itCreateItselfFromCzechFormat()
+    public function itCreateItselfFromCzechFormat():void
     {
         $date = Date::createFromCzechString('23.11.2018');
 
@@ -40,7 +40,7 @@ class DateTest extends TestCase
     /**
      * @test
      */
-    public function itThrowsExceptionWhenCreatingFromCzechFormatWithWrongFormat()
+    public function itThrowsExceptionWhenCreatingFromCzechFormatWithWrongFormat():void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid date given');
@@ -56,7 +56,7 @@ class DateTest extends TestCase
     /**
      * @test
      */
-    public function itCanCorrectlyTellIfItIsEarlierThanGivenDate()
+    public function itCanCorrectlyTellIfItIsEarlierThanGivenDate():void
     {
         $date = new Date(2016, 9, 24);
         $givenDate = new Date(2018, 11, 24);
@@ -67,7 +67,7 @@ class DateTest extends TestCase
     /**
      * @test
      */
-    public function itCanCorrectlyTellIfItIsLaterThanGivenDate()
+    public function itCanCorrectlyTellIfItIsLaterThanGivenDate():void
     {
         $date = new Date(2020, 12, 24);
         $givenDate = new Date(2018, 11, 24);
@@ -78,7 +78,7 @@ class DateTest extends TestCase
     /**
      * @test
      */
-    public function itCanCorrectlyTellIfItIsNotLaterThanGivenDate()
+    public function itCanCorrectlyTellIfItIsNotLaterThanGivenDate():void
     {
         $date = new Date(2016, 12, 24);
         $givenDate = new Date(2018, 11, 24);
@@ -89,7 +89,7 @@ class DateTest extends TestCase
     /**
      * @test
      */
-    public function itCanCorrectlyTellIfItIsNotEarlierThanGivenDate()
+    public function itCanCorrectlyTellIfItIsNotEarlierThanGivenDate():void
     {
         $date = new Date(2020, 12, 24);
         $givenDate = new Date(2018, 11, 24);
@@ -100,7 +100,7 @@ class DateTest extends TestCase
     /**
      * @test
      */
-    public function itCanTellIfItEqualsToGivenDate()
+    public function itCanTellIfItEqualsToGivenDate():void
     {
         $date = new Date(2020, 12, 24);
         $givenDate = new Date(2020, 12, 24);
@@ -111,7 +111,7 @@ class DateTest extends TestCase
     /**
      * @test
      */
-    public function itCanTellIfItNotEqualsToGivenDate()
+    public function itCanTellIfItNotEqualsToGivenDate():void
     {
         $date = new Date(2020, 12, 24);
         $givenDate = new Date(2021, 12, 24);

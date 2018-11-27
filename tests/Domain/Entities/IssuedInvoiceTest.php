@@ -26,7 +26,7 @@ class IssuedInvoiceTest extends TestCase
     /**
      * @test
      */
-    public function itCanCreateItselfWithProvidedInformation()
+    public function itCanCreateItselfWithProvidedInformation():void
     {
         $issuedInvoice = new IssuedInvoice(
             new Seller(
@@ -56,7 +56,7 @@ class IssuedInvoiceTest extends TestCase
     /**
      * @test
      */
-    public function itCanGetTotalAmount()
+    public function itCanGetTotalAmount():void
     {
         /**
          * TODO: Jak dostanu posledni dve veci do tridy, pokud je budu mit v DIC kontejneru nabindovane pres interface?
@@ -91,7 +91,7 @@ class IssuedInvoiceTest extends TestCase
     /**
      * @test
      */
-    public function itThrowsExceptionWhenBuyerIsOnRegistrNespolehlivychPlatcu()
+    public function itThrowsExceptionWhenBuyerIsOnRegistrNespolehlivychPlatcu():void
     {
         $this->expectException(SellerIsOnRegistrNespolehlivychPlatcu::class);
 
@@ -122,7 +122,7 @@ class IssuedInvoiceTest extends TestCase
     /**
      * @test
      */
-    public function itThrowsExceptionWhenDateOfPaymentIsBeforeDateOfIssue()
+    public function itThrowsExceptionWhenDateOfPaymentIsBeforeDateOfIssue():void
     {
         $this->expectException(DateOfPaymentIsBeforeDateOfIssue::class);
 

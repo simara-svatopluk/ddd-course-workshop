@@ -12,7 +12,7 @@ class PaidTest extends TestCase
     /**
      * @test
      */
-    public function itCanCreateItselfAsTrue()
+    public function itCanCreateItselfAsTrue():void
     {
         $paid = new Paid(true);
 
@@ -22,7 +22,7 @@ class PaidTest extends TestCase
     /**
      * @test
      */
-    public function itCanCreateItselfAsFalse()
+    public function itCanCreateItselfAsFalse():void
     {
         $paid = new Paid(false);
 
