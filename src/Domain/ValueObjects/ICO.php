@@ -8,12 +8,11 @@ use InvalidArgumentException;
 
 class ICO
 {
+    protected $ico_pattern = '#^\d{8}$#';
     /**
      * @var string $ico
      */
     private $ico;
-
-    protected $ico_pattern = '#^\d{8}$#';
 
     /**
      * ICO constructor.
@@ -23,23 +22,6 @@ class ICO
     {
         $this->ico = $this->validate($ico);
     }
-
-    /**
-     * @return string
-     */
-    public function getIco(): string
-    {
-        return $this->ico;
-    }
-
-    /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->getIco();
-    }
-
 
     protected function validate(string $ico): string
     {
@@ -75,5 +57,21 @@ class ICO
         }
 
         return $c;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getIco();
+    }
+
+    /**
+     * @return string
+     */
+    public function getIco(): string
+    {
+        return $this->ico;
     }
 }

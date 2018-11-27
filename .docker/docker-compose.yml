@@ -6,7 +6,7 @@ services:
       dockerfile: app/Dockerfile
     image: ddd-course-docker
     ports:
-    - 8080:80
-    - "2222:22"
+      - 8080:80
+      - "2222:22"
     volumes:
-    - ../:/var/www
+      - ../:/var/www

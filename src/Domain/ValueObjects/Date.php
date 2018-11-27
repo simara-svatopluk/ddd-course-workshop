@@ -61,6 +61,29 @@ class Date
     }
 
     /**
+     * @param Date $object
+     *
+     * @return bool
+     */
+    public function earlierThan(Date $object): bool
+    {
+        return !$this->equalsTo($object) && !$this->laterThan($object);
+    }
+
+    /**
+     * @param Date $object
+     *
+     * @return bool
+     */
+    public function equalsTo(Date $object): bool
+    {
+        return
+            $this->getYear() === $object->getYear() &&
+            $this->getMonth() === $object->getMonth() &&
+            $this->getDay() === $object->getDay();
+    }
+
+    /**
      * @return int
      */
     public function getYear(): int
@@ -89,19 +112,6 @@ class Date
      *
      * @return bool
      */
-    public function equalsTo(Date $object): bool
-    {
-        return
-            $this->getYear() === $object->getYear() &&
-            $this->getMonth() === $object->getMonth() &&
-            $this->getDay() === $object->getDay();
-    }
-
-    /**
-     * @param Date $object
-     *
-     * @return bool
-     */
     public function laterThan(Date $object): bool
     {
         return (
@@ -118,15 +128,5 @@ class Date
                 $this->getMonth() >= $object->getMonth() &&
                 $this->getDay() > $object->getDay()
             );
-    }
-
-    /**
-     * @param Date $object
-     *
-     * @return bool
-     */
-    public function earlierThan(Date $object): bool
-    {
-        return !$this->equalsTo($object) && !$this->laterThan($object);
     }
 }

@@ -26,6 +26,26 @@ class InvoiceItems
         $this->items = $this->validate($items);
     }
 
+    protected function validate(array $items): array
+    {
+        foreach ($items as $item) {
+            $this->checkItemType($item);
+        }
+        return $items;
+    }
+
+    /**
+     * @param mixed $item
+     */
+    protected function checkItemType($item): void
+    {
+        if (!$item instanceof InvoiceItem) {
+            throw new InvalidArgumentException(
+                sprintf('Item must be instance of %s but is instance of %s', InvoiceItem::class, get_class($item))
+            );
+        }
+    }
+
     public function add(InvoiceItem $item): InvoiceItems
     {
         $items = $this->items;
@@ -64,25 +84,5 @@ class InvoiceItems
         });
 
         return new TotalAmount($total);
-    }
-
-    protected function validate(array $items): array
-    {
-        foreach ($items as $item) {
-            $this->checkItemType($item);
-        }
-        return $items;
-    }
-
-    /**
-     * @param mixed $item
-     */
-    protected function checkItemType($item): void
-    {
-        if (!$item instanceof InvoiceItem) {
-            throw new InvalidArgumentException(
-                sprintf('Item must be instance of %s but is instance of %s', InvoiceItem::class, get_class($item))
-            );
-        }
     }
 }

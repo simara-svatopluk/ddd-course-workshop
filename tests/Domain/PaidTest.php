@@ -18,6 +18,7 @@ class PaidTest extends TestCase
 
         $this->assertEquals(true, $paid->is());
     }
+
     /**
      * @test
      */

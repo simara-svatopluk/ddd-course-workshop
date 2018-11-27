@@ -101,9 +101,6 @@ class IssuedInvoice
         $this->dateOfPayment = $dateOfPayment;
         $this->paid = $paid;
         $this->number = $number;
-
-        $this->registrNespolehlivychPlatcu = $registrNespolehlivychPlatcu;
-        $this->series = $series;
     }
 
     /**
@@ -128,14 +125,6 @@ class IssuedInvoice
     public function getPaymentInformation(): PaymentInformation
     {
         return $this->paymentInformation;
-    }
-
-    /**
-     * @return InvoiceItems
-     */
-    public function getInvoiceItems(): InvoiceItems
-    {
-        return $this->invoiceItems;
     }
 
     /**
@@ -173,5 +162,13 @@ class IssuedInvoice
     public function getTotalAmount(): TotalAmount
     {
         return $this->getInvoiceItems()->totalAmount();
+    }
+
+    /**
+     * @return InvoiceItems
+     */
+    public function getInvoiceItems(): InvoiceItems
+    {
+        return $this->invoiceItems;
     }
 }
