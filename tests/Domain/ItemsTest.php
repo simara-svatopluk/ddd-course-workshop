@@ -60,4 +60,20 @@ class ItemsTest extends TestCase
             $invoiceItems->totalAmount()->getAmount()
         );
     }
+
+    /**
+     * @test
+     */
+    public function itIsImmutable(): void
+    {
+        $invoiceItems = new Items([
+            new Item('1', 1, 100),
+            new Item('2', 1, 150)
+        ]);
+        $this->assertCount(2, $invoiceItems->getItems());
+
+        $invoiceItems->add(new Item('3', 1, 50));
+
+        $this->assertCount(2, $invoiceItems->getItems());
+    }
 }
