@@ -10,6 +10,7 @@ use DDDWorkshop\Domain\ValueObjects\Buyer;
 use DDDWorkshop\Domain\ValueObjects\DateOfIssue;
 use DDDWorkshop\Domain\ValueObjects\DateOfPayment;
 use DDDWorkshop\Domain\ValueObjects\Items;
+use DDDWorkshop\Domain\ValueObjects\NullICO;
 use DDDWorkshop\Domain\ValueObjects\OrderNumber;
 use DDDWorkshop\Domain\ValueObjects\Paid;
 use DDDWorkshop\Domain\ValueObjects\PaymentInformation;
@@ -75,7 +76,9 @@ class IssuedInvoice
         RegistrNespolehlivychPlatcuInterface $registrNespolehlivychPlatcu,
         SeriesInterface $series
     ) {
-        $registrNespolehlivychPlatcu->check($seller->getIco());
+        if (!$buyer->getIco() instanceof NullICO) {
+            $registrNespolehlivychPlatcu->check($buyer->getIco());
+        }
 
         $number = $series->getNextNumber();
 
