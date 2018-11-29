@@ -20,7 +20,6 @@ class Buyer
     private $ico;
 
     /**
-     * Buyer constructor.
      * @param string $name
      * @param string $address
      * @param ICO|null $ico

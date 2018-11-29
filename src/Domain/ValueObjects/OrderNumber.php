@@ -12,7 +12,6 @@ class OrderNumber
     private $number;
 
     /**
-     * NumberTest constructor.
      * @param string $number
      */
     public function __construct(string $number)

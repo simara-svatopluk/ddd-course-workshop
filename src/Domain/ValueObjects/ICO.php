@@ -8,14 +8,13 @@ use InvalidArgumentException;
 
 class ICO
 {
-    protected $ico_pattern = '#^\d{8}$#';
+    private const ICO_PATTERN = '#^\d{8}$#';
     /**
      * @var string $ico
      */
     private $ico;
 
     /**
-     * ICO constructor.
      * @param string $ico
      */
     public function __construct(string $ico)
@@ -26,21 +25,26 @@ class ICO
     protected function validate(string $ico): string
     {
         // has correct pattern
-        if (!preg_match($this->ico_pattern, $ico)) {
+        if (!preg_match(self::ICO_PATTERN, $ico)) {
             throw new InvalidArgumentException('Invalid ICO pattern');
         }
 
         // checksum
         $c = $this->calculateChecksum($ico);
 
-        if ((int)$ico[7] === $c) {
+        if ($this->checkChecksum($c, $ico)) {
             return $ico;
         }
 
         throw new InvalidArgumentException('Invalid ICO');
     }
 
-    protected function calculateChecksum($ico): int
+    protected function checkChecksum(int $checksum, string $ico): bool
+    {
+        return (int)$ico[7] === $checksum;
+    }
+
+    protected function calculateChecksum(string $ico): int
     {
         $a = 0;
         for ($i = 0; $i < 7; $i++) {

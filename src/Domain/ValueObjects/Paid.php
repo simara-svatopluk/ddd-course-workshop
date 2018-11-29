@@ -12,7 +12,6 @@ class Paid
     private $is;
 
     /**
-     * Paid constructor.
      * @param bool $is
      */
     public function __construct(bool $is)

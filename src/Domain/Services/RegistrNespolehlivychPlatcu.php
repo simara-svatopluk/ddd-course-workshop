@@ -13,4 +13,11 @@ class RegistrNespolehlivychPlatcu implements RegistrNespolehlivychPlatcuInterfac
     {
         return false;
     }
+
+    public function check(ICO $ICO): void
+    {
+
+    }
+
+
 }

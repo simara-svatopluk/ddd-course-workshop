@@ -4,26 +4,27 @@ declare(strict_types=1);
 
 namespace DDDWorkshop\Domain\ValueObjects;
 
+use Carbon\Carbon;
+
 class DateOfPayment
 {
     /**
-     * @var Date
+     * @var Carbon
      */
     private $date;
 
     /**
-     * DateOfPayment constructor.
-     * @param Date $date
+     * @param Carbon $date
      */
-    public function __construct(Date $date)
+    public function __construct(Carbon $date)
     {
         $this->date = $date;
     }
 
     /**
-     * @return Date
+     * @return Carbon
      */
-    public function getDate(): Date
+    public function getDate(): Carbon
     {
         return $this->date;
     }

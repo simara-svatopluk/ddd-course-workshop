@@ -20,7 +20,6 @@ class Seller
     private $ico;
 
     /**
-     * Seller constructor.
      * @param string $name
      * @param string $address
      * @param ICO $ico

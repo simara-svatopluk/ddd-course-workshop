@@ -9,7 +9,6 @@ class TotalAmount
     private $amount;
 
     /**
-     * TotalAmount constructor.
      * @param float $amount
      */
     public function __construct(float $amount = 0)

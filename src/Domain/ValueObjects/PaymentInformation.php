@@ -7,24 +7,37 @@ namespace DDDWorkshop\Domain\ValueObjects;
 class PaymentInformation
 {
     /**
-     * @var string
+     * @var BankAccountNumber
      */
-    private $label;
+    private $bankAccountNumber;
+    /**
+     * @var VariableSymbol
+     */
+    private $variableSymbol;
 
     /**
-     * PaymentInformation constructor.
-     * @param string $label
+     * @param BankAccountNumber $bankAccountNumber
+     * @param VariableSymbol $variableSymbol
      */
-    public function __construct(string $label)
+    public function __construct(BankAccountNumber $bankAccountNumber, VariableSymbol $variableSymbol)
     {
-        $this->label = $label;
+        $this->bankAccountNumber = $bankAccountNumber;
+        $this->variableSymbol = $variableSymbol;
     }
 
     /**
-     * @return string
+     * @return BankAccountNumber
      */
-    public function getLabel(): string
+    public function getBankAccountNumber(): BankAccountNumber
     {
-        return $this->label;
+        return $this->bankAccountNumber;
+    }
+
+    /**
+     * @return VariableSymbol
+     */
+    public function getVariableSymbol(): VariableSymbol
+    {
+        return $this->variableSymbol;
     }
 }

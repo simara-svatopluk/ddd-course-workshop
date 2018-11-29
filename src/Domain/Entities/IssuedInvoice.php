@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace DDDWorkshop\Domain\Entities;
 
-use DDDWorkshop\Domain\Exceptions\DateOfPaymentIsBeforeDateOfIssue;
-use DDDWorkshop\Domain\Exceptions\SellerIsOnRegistrNespolehlivychPlatcu;
 use DDDWorkshop\Domain\Interfaces\RegistrNespolehlivychPlatcuInterface;
 use DDDWorkshop\Domain\Interfaces\SeriesInterface;
 use DDDWorkshop\Domain\ValueObjects\Buyer;
 use DDDWorkshop\Domain\ValueObjects\DateOfIssue;
 use DDDWorkshop\Domain\ValueObjects\DateOfPayment;
-use DDDWorkshop\Domain\ValueObjects\InvoiceItems;
+use DDDWorkshop\Domain\ValueObjects\Items;
 use DDDWorkshop\Domain\ValueObjects\OrderNumber;
 use DDDWorkshop\Domain\ValueObjects\Paid;
 use DDDWorkshop\Domain\ValueObjects\PaymentInformation;
@@ -33,7 +31,7 @@ class IssuedInvoice
      */
     private $paymentInformation;
     /**
-     * @var InvoiceItems
+     * @var Items
      */
     private $invoiceItems;
     /**
@@ -54,39 +52,34 @@ class IssuedInvoice
     private $number;
 
     /**
-     * IssuedInvoice constructor.
      * @param Seller $seller
      * @param Buyer $buyer
      * @param PaymentInformation $paymentInformation
-     * @param InvoiceItems $invoiceItems
+     * @param Items $invoiceItems
      * @param DateOfIssue $dateOfIssue
      * @param DateOfPayment $dateOfPayment
      * @param Paid $paid
      * @param RegistrNespolehlivychPlatcuInterface $registrNespolehlivychPlatcu
      * @param SeriesInterface $series
-     * @throws SellerIsOnRegistrNespolehlivychPlatcu
+     * @throws \DDDWorkshop\Domain\Exceptions\DateOfPaymentIsBeforeDateOfIssue
+     * @throws \DDDWorkshop\Domain\Exceptions\IcoIsOnRegistrNespolehlivychPlatcu
      */
     public function __construct(
         Seller $seller,
         Buyer $buyer,
         PaymentInformation $paymentInformation,
-        InvoiceItems $invoiceItems,
+        Items $invoiceItems,
         DateOfIssue $dateOfIssue,
         DateOfPayment $dateOfPayment,
         Paid $paid,
         RegistrNespolehlivychPlatcuInterface $registrNespolehlivychPlatcu,
         SeriesInterface $series
     ) {
-        //check Registr Nespolehlivych Platcu
-        if ($registrNespolehlivychPlatcu->isPresentByIco($seller->getIco())) {
-            throw new SellerIsOnRegistrNespolehlivychPlatcu($seller);
-        }
-        //get next number in series
+        $registrNespolehlivychPlatcu->check($seller->getIco());
+
         $number = $series->getNextNumber();
-        //check that date of issue is before date of payment
-        if (!$dateOfIssue->getDate()->earlierThan($dateOfPayment->getDate())) {
-            throw new DateOfPaymentIsBeforeDateOfIssue($dateOfIssue, $dateOfPayment);
-        }
+
+        $dateOfIssue->checkIsBefore($dateOfPayment);
 
         $this->seller = $seller;
         $this->buyer = $buyer;
@@ -160,9 +153,9 @@ class IssuedInvoice
     }
 
     /**
-     * @return InvoiceItems
+     * @return Items
      */
-    public function getInvoiceItems(): InvoiceItems
+    public function getInvoiceItems(): Items
     {
         return $this->invoiceItems;
     }

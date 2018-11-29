@@ -6,20 +6,18 @@ namespace DDDWorkshop\Domain\ValueObjects;
 
 use InvalidArgumentException;
 use function array_reduce;
-use function count;
 use function get_class;
 use function sprintf;
 
-class InvoiceItems
+class Items
 {
     /**
-     * @var array|InvoiceItem[]
+     * @var array|Item[]
      */
     private $items;
 
     /**
-     * InvoiceItems constructor.
-     * @param array|InvoiceItem[] $items
+     * @param array|Item[] $items
      */
     public function __construct(array $items = [])
     {
@@ -39,25 +37,25 @@ class InvoiceItems
      */
     protected function checkItemType($item): void
     {
-        if (!$item instanceof InvoiceItem) {
+        if (!$item instanceof Item) {
             throw new InvalidArgumentException(
-                sprintf('Item must be instance of %s but is instance of %s', InvoiceItem::class, get_class($item))
+                sprintf('Item must be instance of %s but is instance of %s', Item::class, get_class($item))
             );
         }
     }
 
-    public function add(InvoiceItem $item): InvoiceItems
+    public function add(Item $item): Items
     {
         $items = $this->items;
         $items[] = $item;
 
-        return new InvoiceItems(
+        return new Items(
             $items
         );
     }
 
     /**
-     * @return array|InvoiceItem[]
+     * @return array|Item[]
      */
     public function getItems(): array
     {
@@ -65,23 +63,15 @@ class InvoiceItems
     }
 
     /**
-     * @return int
-     */
-    public function count(): int
-    {
-        return count($this->items);
-    }
-
-    /**
      * @return TotalAmount
      */
     public function totalAmount(): TotalAmount
     {
-        $total = (float)array_reduce($this->items, function (?int $carry, InvoiceItem $item) {
+        $total = (float)array_reduce($this->items, function (float $carry, Item $item) {
             $carry += $item->getTotalAmount();
 
             return $carry;
-        });
+        }, 0);
 
         return new TotalAmount($total);
     }

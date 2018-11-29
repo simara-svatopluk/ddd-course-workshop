@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DDDWorkshop\Domain\ValueObjects;
 
-class InvoiceItem
+class Item
 {
     /**
      * @var string
@@ -20,7 +20,6 @@ class InvoiceItem
     private $amount;
 
     /**
-     * InvoiceItem constructor.
      * @param string $name
      * @param int $quantity
      * @param float $amount
