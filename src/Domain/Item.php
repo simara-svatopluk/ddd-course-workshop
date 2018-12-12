@@ -6,40 +6,45 @@ use DDDWorkshop\Domain\Interfaces\IValueObject;
 use Money\Currency;
 use Money\Money;
 
-class TotalAmount implements IValueObject
+class Item implements IValueObject
 {
     private const CZK = 'CZK';
 
     /** @var Money */
-    private $amount;
+    private $price;
+
+    /** @var string */
+    private $name;
 
 
     /**
-     * @param Money $amount
+     * @param Money $price
+     * @param string $name
      * @throws \DDDWorkshop\Domain\Exceptions\CurrencyIsNotCzkException
      */
-    public function __construct(Money $amount)
+    public function __construct(Money $price, string $name)
     {
-        if (! $amount->getCurrency()->equals(new Currency(self::CZK))) {
+        if (! $price->getCurrency()->equals(new Currency(self::CZK))) {
             throw new \DDDWorkshop\Domain\Exceptions\CurrencyIsNotCzkException();
         }
-        $this->amount = $amount;
-    }
-
-    /**
-     * @return float
-     */
-    public function toFloat(): float
-    {
-        return (float) ($this->amount->getAmount() / 100);
+        $this->price = $price;
+        $this->name = $name;
     }
 
     /**
      * @return Money
      */
-    public function getAmount(): Money
+    public function getPrice(): Money
     {
-        return $this->amount;
+        return $this->price;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
     }
 
     /**
@@ -49,6 +54,7 @@ class TotalAmount implements IValueObject
     public function equals(IEquatable $other): bool
     {
         return ($other instanceof self
-            && $other->amount->equals($this->amount));
+            && $other->price->equals($this->price)
+            && $other->name === $this->name);
     }
 }
