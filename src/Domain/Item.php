@@ -32,10 +32,10 @@ final class Item
         return $this->price;
     }
 
-    public function isEqual(self $compared): bool
+    public function equals(self $compared): bool
     {
         return
-            $this->price->isEqual($compared->price)
+            $this->price->equals($compared->price)
             && $this->text === $compared->text;
     }
 }

@@ -32,7 +32,7 @@ final class Items
     {
         $items = $this->items;
         foreach ($items as $key => $item) {
-            if ($item->isEqual($itemToRemove)) {
+            if ($item->equals($itemToRemove)) {
                 unset($items[$key]);
                 return new self($items);
             }

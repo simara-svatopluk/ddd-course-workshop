@@ -26,7 +26,7 @@ final class Crown
         return $this->hellers;
     }
 
-    public function isEqual(self $compared): bool
+    public function equals(self $compared): bool
     {
         return $this->hellers === $compared->hellers;
     }
