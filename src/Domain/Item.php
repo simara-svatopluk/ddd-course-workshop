@@ -12,11 +12,11 @@ final class Item
     private $text;
 
     /**
-     * @var float
+     * @var Crown
      */
     private $price;
 
-    public function __construct(string $text, float $price)
+    public function __construct(string $text, Crown $price)
     {
         $this->text = $text;
         $this->price = $price;
@@ -27,7 +27,7 @@ final class Item
         return $this->text;
     }
 
-    public function getPrice(): float
+    public function getPrice(): Crown
     {
         return $this->price;
     }
@@ -35,7 +35,7 @@ final class Item
     public function isEqual(self $compared): bool
     {
         return
-            $this->price === $compared->price
+            $this->price->isEqual($compared->price)
             && $this->text === $compared->text;
     }
 }

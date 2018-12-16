@@ -13,10 +13,10 @@ final class IssuedInvoiceTest extends TestCase
     {
         $invoice = new IssuedInvoice($this->createStaticSeries(), []);
 
-        $invoice->addItem(new Item('', 1.0));
+        $invoice->addItem(new Item('', new Crown(100)));
 
         $expected = [
-            new Item('', 1.0),
+            new Item('', new Crown(100)),
         ];
         $this->assertEquals($expected, $invoice->getItems());
     }
@@ -25,14 +25,14 @@ final class IssuedInvoiceTest extends TestCase
     {
         $invoice = new IssuedInvoice(
             $this->createStaticSeries(),
-            [new Item('table', 1000.0)]
+            [new Item('table', new Crown(100000))]
         );
 
-        $invoice->addItem(new Item('', 1.0));
+        $invoice->addItem(new Item('', new Crown(100)));
 
         $expected = [
-            new Item('table', 1000.0),
-            new Item('', 1.0),
+            new Item('table', new Crown(100000)),
+            new Item('', new Crown(100)),
         ];
         $this->assertEquals($expected, $invoice->getItems());
     }
@@ -42,15 +42,15 @@ final class IssuedInvoiceTest extends TestCase
         $invoice = new IssuedInvoice(
             $this->createStaticSeries(),
             [
-                new Item('table', 1000.0),
-                new Item('spoon', 10.0),
+                new Item('table', new Crown(100000)),
+                new Item('spoon', new Crown(1000)),
             ]
         );
 
-        $invoice->removeItem(new Item('table', 1000.0));
+        $invoice->removeItem(new Item('table', new Crown(100000)));
 
         $expected = [
-            new Item('spoon', 10.0),
+            new Item('spoon', new Crown(1000)),
         ];
         $this->assertEquals($expected, $invoice->getItems());
     }
@@ -62,12 +62,12 @@ final class IssuedInvoiceTest extends TestCase
         $invoice = new IssuedInvoice(
             $this->createStaticSeries(),
             [
-                new Item('table', 1000.0),
-                new Item('spoon', 10.0),
+                new Item('table', new Crown(100000)),
+                new Item('spoon', new Crown(10000)),
             ]
         );
 
-        $invoice->removeItem(new Item('fork', 50.0));
+        $invoice->removeItem(new Item('fork', new Crown(5000)));
     }
 
     public function testIssuedInvoiceUsesSeriesAndTheRightNumber(): void
