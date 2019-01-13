@@ -16,6 +16,9 @@ final class Items
         $this->items = $items;
     }
 
+    /**
+     * @return Item[]
+     */
     public function getItems(): array
     {
         return array_values($this->items);

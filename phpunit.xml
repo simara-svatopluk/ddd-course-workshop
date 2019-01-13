@@ -1,0 +1,19 @@
+<phpunit bootstrap="vendor/autoload.php">
+    <php>
+        <var name="DB_DRIVER" value="pdo_sqlite" />
+        <var name="DB_USER" value="postgres" />
+        <var name="DB_PASSWORD" value="***" />
+        <var name="DB_NAME" value="test" />
+        <var name="DB_HOST" value="127.0.0.1" />
+    </php>
+    <testsuites>
+        <testsuite name="IssuedInvoice">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">src/</directory>
+        </whitelist>
+    </filter>
+</phpunit>

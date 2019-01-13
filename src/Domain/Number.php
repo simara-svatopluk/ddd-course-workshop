@@ -20,4 +20,26 @@ final class Number
 
         $this->number = $formattedNumber;
     }
+
+    public function equals(self $compared): bool
+    {
+        return $this->number === $compared->number;
+    }
+
+    public function toString(): string
+    {
+        return $this->number;
+    }
+
+    public function __toString()
+    {
+        return $this->number;
+    }
+
+    public static function fromString(string $number): self
+    {
+        $self = new self('', '');
+        $self->number = $number;
+        return $self;
+    }
 }
