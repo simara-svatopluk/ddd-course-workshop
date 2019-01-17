@@ -17,3 +17,8 @@ Command `composer check` does all of it.
 
 * [Language](https://github.com/simara-svatopluk/ddd-course/blob/master/2-language/workshop/workshop.md)
 * [Model](https://github.com/simara-svatopluk/ddd-course/blob/master/3-model/workshop/workshop.md)
+
+## Demo resources
+
+* [Implementation](http://bit.ly/ddd-implementation-materials)
+* [Persistence](http://bit.ly/ddd-persistence-materials)
