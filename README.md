@@ -1,6 +1,16 @@
 # DDD Course Workshop
 
-Repository ready to doing implementing the DDD.
+Repository demonstates DDD implementation, done during [DDD course](http://bit.ly/ddd-course).
+
+### Implemented
+
+* Aggregate `IssuedInovice` *(also an entity)*
+* Value Objects `Item`, `Items`, `Number`, `Crown`
+* Domain interface `Series`
+* Repository `IssuedInvoices`
+* PDO implementation of `Series`
+* Doctrine implementation of `IssuedInvices`
+* A reasonable amout of tests (code coverage almost 100)
 
 ## Run
 ```bash
